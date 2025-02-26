@@ -12,6 +12,10 @@ Design patterns are **reusable solutions** to common software design problems in
 ---
 
 ## 🚀 What Should You Know Before Learning?
+
+<img src="git_images/rubyIcon.png" alt="drawing" width="5%"/>
+
+
 **Nothing!** Well... maybe just the basics of programming. Here’s a quick checklist to help you get started:
 
 - **Data Types**: Integers, Floats, Strings, Char, Boolean
