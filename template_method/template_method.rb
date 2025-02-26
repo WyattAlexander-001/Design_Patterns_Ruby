@@ -20,7 +20,6 @@ class Report
   end
 
   def output_body
-    
     @text.each do |line| # line refers to each element in the array
       output_line(line)
       @counter += 1
