@@ -3,7 +3,10 @@ class Report
   def initialize
     @title = 'Monthly Report'
     @text = ['Things are going', 'really, really well.']
+    @counter = 1
   end
+
+  attr_accessor :title, :text, :counter
 
   # This is the template method that is the same for all subclasses
   def output_report
@@ -12,12 +15,15 @@ class Report
     output_body_start
     output_body
     output_body_end
+    output_total_count
     output_end
   end
 
   def output_body
+    
     @text.each do |line| # line refers to each element in the array
       output_line(line)
+      @counter += 1
     end
   end
 
@@ -44,6 +50,10 @@ class Report
   def output_end
     raise 'Called abstract method: output_end'
   end
+
+  def output_total_count
+    puts "Total number of lines: #{@counter - 1}" # -1 because we start at 1
+  end
 end
 
 # You could put this in a separate file and simply require it like: require 'html_report.rb'
@@ -63,7 +73,7 @@ class HTMLReport < Report
   end
 
   def output_line(line)
-    puts(" <p>#{line}</p>")
+    puts("<ol>#{line}</ol>")
   end
 
   def output_body_end
@@ -73,6 +83,12 @@ class HTMLReport < Report
   def output_end
     puts('</html>')
   end
+
+  def output_total_count
+    puts("<p>Total number of lines: #{@counter - 1}</p>")
+  end
+
+  
 end
 
 # Same deal here, you could put this in a separate file and simply require it like: require 'plain_text_report.rb'
@@ -93,6 +109,10 @@ class PlainTextReport < Report
   def output_body_end; end
 
   def output_end; end
+
+  def output_total_count
+    puts("Total number of lines: #{@counter - 1}")
+  end
 end
 
 class BroSpeakReport < Report
@@ -101,20 +121,24 @@ class BroSpeakReport < Report
   end
 
   def output_head
-    puts("**** #{@title} ****")
+    puts("**** #{@title} Brosef!!! ****")
     puts
   end
 
   def output_body_start; end
 
   def output_line(line)
-    puts(line + ', dude')
+    puts("Order of business ##{@counter} "+ line + ', dude')
   end
 
   def output_body_end; end
 
   def output_end
-    puts('Peace out')
+    puts('Peace out!')
+  end
+
+  def output_total_count
+    puts("Total number of lines: #{@counter - 1} my dude")
   end
 end
 
