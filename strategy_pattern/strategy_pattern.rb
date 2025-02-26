@@ -42,6 +42,7 @@ class BroTalkFormatter < Formatter
     puts("So yeah, peace out.")
     puts("And remember, bros before shoes.")
   end
+end
 # ==============================
 
 
@@ -62,15 +63,16 @@ class Report
 end
 
 
-report = Report.new(HTMLFormatter.new) # Here we are using the HTMLFormatter
-report.output_report # This will output the report in HTML
-puts "====================="
-report.formatter = PlainTextFormatter.new # Here we are using the PlainTextFormatter notice that we are changing the formatter
-report.output_report
-puts "====================="
-report.formatter = BroTalkFormatter.new
-report.output_report
-end
+
+  report = Report.new(HTMLFormatter.new) # Here we are using the HTMLFormatter
+  report.output_report # This will output the report in HTML
+  puts "====================="
+  report.formatter = PlainTextFormatter.new # Here we are using the PlainTextFormatter notice that we are changing the formatter
+  report.output_report
+  puts "====================="
+  report.formatter = BroTalkFormatter.new
+  report.output_report
+
 
 =begin
 
