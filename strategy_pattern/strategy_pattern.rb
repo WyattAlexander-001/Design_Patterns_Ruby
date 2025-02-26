@@ -32,6 +32,16 @@ class PlainTextFormatter < Formatter
     end
   end
 end
+
+class BroTalkFormatter < Formatter
+  def output_report(title, text)
+    puts("Yo, this is the #{title}")
+    text.each do |line|
+      puts("And I'm like, #{line}")
+    end
+    puts("So yeah, peace out.")
+    puts("And remember, bros before shoes.")
+  end
 # ==============================
 
 
@@ -54,11 +64,16 @@ end
 
 report = Report.new(HTMLFormatter.new) # Here we are using the HTMLFormatter
 report.output_report # This will output the report in HTML
-
+puts "====================="
 report.formatter = PlainTextFormatter.new # Here we are using the PlainTextFormatter notice that we are changing the formatter
 report.output_report
+puts "====================="
+report.formatter = BroTalkFormatter.new
+report.output_report
+end
 
 =begin
+
 This code demonstrates the **Strategy Pattern** using delegation.
 
 1. The `Formatter` class defines an interface (abstract method `output_report`) that all formatters must implement.
@@ -69,5 +84,6 @@ This code demonstrates the **Strategy Pattern** using delegation.
    - The `output_report` method that calls the assigned formatter's `output_report` method.
 4. The **key feature** of this implementation is that it allows changing the formatting logic dynamically by assigning a different formatter to the `Report` object.
 5. This approach **promotes code reuse and separation of concerns** by isolating formatting logic from the `Report` class.
+
 =end
 
