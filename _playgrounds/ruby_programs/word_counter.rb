@@ -55,11 +55,11 @@ class WordCounterGUI
 
 
   # ===== Private Methods =====
-  
+
   private  # Used to define private methods, which are not accessible outside the class
 
   def select_file
-    path = Tk.getOpenFile('filetypes' => [["Text Files", "*.txt"], ["All Files", "*"]])
+    path = Tk.getOpenFile('filetypes' => [["Text Files", "*.txt"], ["All Files", "*"]]) # This defaults to documents folder
     return if path.nil? || path.empty?
     process_file(path)
   end
@@ -121,5 +121,5 @@ class WordCounterGUI
   end
 end
 
-WordCounterGUI.new
+WordCounterGUI.new # This is the entry point of the program
 
