@@ -72,37 +72,40 @@ report.output_report
 
 =begin
 
-This code is a cleaner way to **change how reports are formatted** without changing the `Report` class itself. 
+This code demonstrates the **Strategy Pattern** using delegation but with a simplified approach.
 
-### **What’s Different?**
-1. **No More Formatter Superclass**
-   - Before, we had a `Formatter` class that all formatters had to inherit from.
-   - In Ruby, you **don’t need** to force everything into a class hierarchy. Instead, objects that respond to the same method (`output_report`) can be swapped easily.
-   - This makes the code **simpler and more flexible**.
+### **Key Changes from Previous Implementation**
+1. **Removed the `Formatter` superclass**
+   - Instead of requiring formatters to inherit from `Formatter`, this version directly implements the formatting logic inside independent classes (`HTMLFormatter`, `PlainTextFormatter`, and `BroTalkFormatter`).
+   - This allows for **greater flexibility**, as new formatters do not need to follow an inheritance structure.
 
-2. **Formatters Get the Whole Report**
-   - Instead of passing just `title` and `text`, we now send the entire `Report` object (`self`).
-   - Why? In Ruby, objects are **lightweight** and can easily be passed around.
-   - This lets formatters grab any part of the report they need, **without changing how Report works**.
+2. **`Report` Class as Context**
+   - The `Report` class holds:
+     - A `title` and `text` as the core data.
+     - A `formatter` object that is responsible for displaying the report.
+     - The `output_report` method that delegates formatting to `@formatter.output_report(self)`, passing the entire `Report` object (`self`) to the formatter.
 
-### **Why is this Better in Ruby?**
-✅ **Ruby doesn’t force strict rules** like Java or C++—if an object has the right method (`output_report`), it works!  
-✅ **No unnecessary inheritance**—formatters don’t need a superclass, they just need the right method.  
-✅ **More flexible and readable**—changing the format is as easy as switching the `formatter` object.  
+3. **Decoupled Formatting Strategies**
+   - Instead of formatters receiving a `title` and `text` separately, they now accept the **whole `Report` object** (`context`).
+   - This means formatters can extract any needed data (`context.title`, `context.text`) dynamically.
+   - This makes the formatting logic **more adaptable**, since formatters are not bound to a fixed set of parameters.
 
-### **How This Works**
-1. We create a `Report` and give it an `HTMLFormatter`.
-2. The `output_report` method tells the formatter to print the report.
-3. We change the `formatter` to `PlainTextFormatter` and call `output_report` again.
-4. We switch to `BroTalkFormatter` and print one last time.
-5. The `Report` class **never changes**, but it can produce totally different outputs.
+### **Benefits of This Approach**
+✅ **Loose Coupling** - The `Report` class does not need to know how each formatter works, only that it has an `output_report(context)` method.  
+✅ **Easier Extensibility** - New formatters can be added **without modifying existing code**.  
+✅ **More Flexible Formatting** - Since formatters receive the entire `Report` object, they can modify how data is accessed or presented without changing `Report`.  
+✅ **Strategy Pattern Without Inheritance** - Uses **composition instead of inheritance**, making it more flexible and reducing unnecessary dependencies.
 
-### **Why This is Cool**
-- We can **add new formatters anytime** without touching the `Report` class.
-- We use **Ruby’s dynamic nature** to treat different objects the same, as long as they have `output_report`.
+### **Execution Flow**
+1. A `Report` instance is created with an **`HTMLFormatter`**.
+2. The `output_report` method calls `formatter.output_report(self)`, printing an HTML-formatted report.
+3. The `formatter` is changed to `PlainTextFormatter`, and the report is printed in plain text.
+4. The `formatter` is then changed to `BroTalkFormatter`, and the report is printed in a **casual, humorous tone**.
 
-This is a **Ruby-friendly way** to use the **Strategy Pattern** without making things too complicated.
+### **Final Thoughts**
+- This implementation maintains the **Strategy Pattern** while simplifying the structure.
+- It follows the **Open/Closed Principle (OCP)** - new formatters can be added **without modifying existing code**.
+- The separation of concerns makes the code **clean, modular, and easy to maintain**.
 
 =end
-
 
