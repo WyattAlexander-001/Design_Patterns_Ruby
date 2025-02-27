@@ -103,9 +103,35 @@ fred.add_observer(weekly_payroll)
 fred.add_observer(monthly_payroll)
 
 # Changing salary
+puts "***** Changing salary ******"
 fred.salary = 35_000.00
+puts "#######################"
 fred.salary = 40_000.00
 
 # Changing title
+puts "******* Changing title *******"
 fred.title = 'Head Janitor'
+puts "#######################"
 fred.title = 'Operations Manager'
+
+
+=begin
+  This block of code illustrates the Observer (publish-subscribe) pattern in Ruby.
+
+  1. Subject (Employee):
+     - Maintains a list of observers.
+     - Notifies observers whenever one of its attributes changes (title or salary).
+     - Observers register themselves to receive updates.
+
+  2. Observers (Payroll, TaxMan, WeeklyPayroll, MonthlyPayroll):
+     - Implement an `update` method, which is called by the subject.
+     - Each observer receives both the changed employee (subject) and the attribute that changed (:salary or :title).
+     - They can then handle the change accordingly (e.g., printing out salary changes, sending notices, etc.).
+
+  This decouples the objects (observers) from the subject, promoting loose coupling and scalability:
+  - You can add or remove observers without modifying the subject’s core logic.
+  - Each observer focuses on its own specific behavior when changes occur.
+
+  In short, this example demonstrates how to keep multiple parts of a system in sync
+  whenever a notable change happens, all without unnecessary inter-dependencies.
+=end
