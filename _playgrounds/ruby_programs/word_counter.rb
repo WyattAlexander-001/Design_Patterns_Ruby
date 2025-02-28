@@ -18,11 +18,11 @@ class WordCounterGUI
   def initialize
     @root = TkRoot.new do
       title "Ruby Word Counter"
-      minsize(500, 500)
+      minsize(1280, 720)
     end
 
     main_frame = TkFrame.new(@root)
-    main_frame.pack(padx: 10, pady: 10, fill: 'both', expand: true)
+    main_frame.pack(padx: 64, pady: 32, fill: 'both', expand: true)
 
     # This makes the title of the app and
     TkLabel.new(main_frame) do
@@ -32,11 +32,19 @@ class WordCounterGUI
       pack(pady: 5)
     end
 
+    TkLabel.new(main_frame) do
+      text "Best used with .txt files"
+      font TkFont.new('Arial 8 bold')
+      foreground 'blue'
+      pack(pady: 5)
+    end
+
     TkButton.new(main_frame,
       text: "Select Your Text File",
       command: proc { select_file }
     ).pack(pady: 5)
 
+    
     @results_text = TkText.new(main_frame)
     @results_text.height = 15
     @results_text.width  = 60
