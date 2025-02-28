@@ -87,3 +87,14 @@ Understanding design patterns helps you:
 Check out the individual pattern implementations and **start coding!** If you have any questions or suggestions, feel free to contribute or reach out.
 
 Happy coding! 🎉
+
+
+---
+### Other stuff in this repo:
+# Rails Stuff
+
+```
+rails generate scaffold idea name:string description:text picture:string
+```
+
+# Sinatra Stuff
