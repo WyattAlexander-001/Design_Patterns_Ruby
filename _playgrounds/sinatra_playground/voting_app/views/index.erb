@@ -10,9 +10,9 @@
     <div class="container">
       <p>What's for dinner?</p>
 
-      <form action="cast" method="post">
+      <form action="cast" method="post"> <!-- cast refers to -->
         <div class="mb-3">
-          <% Choices.each do |id, text| %>
+          <% Choices.each do |id, text| %> <!-- Choices is a hash defined in the controller -->
             <div class="form-check">
               <input type="radio" name="vote" value="<%= id %>" class="form-check-input" id="vote_<%= id %>" />
               <label class="form-check-label" for="vote_<%= id %>">
