@@ -15,7 +15,7 @@ class HourlyPayCalculator # We don't need to inherit from PayCalculator, we can 
   end
 
   def calculate_pay # This method is required to be implemented by the PayCalculator module, no need for an override keyword
-    overtime_hours = [@hours_worked - 40, 0].max
+    overtime_hours = [@hours_worked - 40, 0].max # max prevents negative values such as 38 - 40 = -2, it would turn to 0
     regular_hours = @hours_worked - overtime_hours
     (regular_hours * @hourly_rate) + (overtime_hours * @hourly_rate * @overtime_rate)
   end
@@ -72,8 +72,13 @@ deductions = [Deduction.new("Tax", 20), Deduction.new("401k", 5)]
 # Create an employee with an hourly pay rate of $20, and worked 45 hours
 john_hourly= Employee.new("John Doe", HourlyPayCalculator.new(20, 45), deductions)
 
-# Create an employee with an annual salary of $60,000, and 26 pay periods
-jane_salary = Employee.new("Jane Smith", SalariedPayCalculator.new(60000, 26), deductions)
+# Create an employee with an annual salary of $60,000, and 52 pay periods
+jane_salary = Employee.new("Jane Smith", SalariedPayCalculator.new(60000, 52), deductions)
 
+puts "********** Payroll System **********"
+puts "Employee Paychecks: "
 puts "#{john_hourly.name} - Net Pay: $#{john_hourly.net_pay.round(2)}"
 puts "#{jane_salary.name} - Net Pay: $#{jane_salary.net_pay.round(2)}"
+
+puts 15.3242353453.round(2) # Rounds to 2 decimal places
+puts 15.3242353453.round(3) # Rounds to 3 decimal places

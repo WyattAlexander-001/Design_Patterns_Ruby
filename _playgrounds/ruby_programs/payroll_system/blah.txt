@@ -1,0 +1,2 @@
+Here is some text.
+# Path: _playgrounds/ruby_programs/payroll_system/blah.txt
